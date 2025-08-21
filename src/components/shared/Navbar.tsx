@@ -1,5 +1,6 @@
+"use client";
 import Link from "next/link";
-import { CircleUser, Menu, Car } from "lucide-react";
+import { Menu, Car } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,6 +16,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { ThemeToggler } from "./ThemeTogger";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   // { href: "#features", label: "Features" },
@@ -26,6 +28,9 @@ const navLinks = [
 ];
 
 export function Navbar() {
+  const pathName = usePathname();
+  if (pathName.includes("/register") || pathName.includes("/login"))
+    return null;
   return (
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
       <div className="container mx-auto flex h-16 items-center justify-between px-3">

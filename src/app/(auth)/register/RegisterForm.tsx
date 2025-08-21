@@ -81,7 +81,7 @@ export function RegisterForm({ role }: { role: "rider" | "driver" }) {
   }
 
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="mx-auto max-w-sm flex-1">
       <CardHeader>
         <CardTitle className="text-2xl">Register</CardTitle>
         <CardDescription>

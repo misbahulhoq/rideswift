@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 const RegisterPage = () => {
   const searchParams = useSearchParams();
   return (
-    <div className="container mx-auto px-3 md:px-6">
+    <div className="container mx-auto flex min-h-screen items-center justify-center px-3 md:px-6">
       <RegisterForm role={searchParams.get("role") as "rider" | "driver"} />
     </div>
   );
