@@ -16,12 +16,12 @@ export function Hero() {
       </div>
 
       {/* Hero Content */}
-      <div className="text-primary-foreground container px-4 text-center md:px-6">
+      <div className="container px-4 text-center text-white md:px-6">
         <div className="mx-auto max-w-3xl">
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Your Ride, Your Way, Right Away
           </h1>
-          <p className="text-primary-foreground/80 mt-4 text-lg md:text-xl">
+          <p className="mt-4 text-lg text-white/75 md:text-xl">
             Request a ride, get picked up by a nearby driver, and enjoy a safe,
             affordable trip to your destination. Quick, easy, and reliable.
           </p>

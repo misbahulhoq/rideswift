@@ -1,9 +1,16 @@
-// src/components/shared/Footer.tsx
-
+"use client";
 import Link from "next/link";
 import { Car, Facebook, Twitter, Instagram } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export function Footer() {
+  const pathName = usePathname();
+  const isSignupPage = pathName.includes("/register");
+  const isLoginPage = pathName.includes("/login");
+
+  if (isSignupPage || isLoginPage) {
+    return null;
+  }
   return (
     <footer className="bg-muted text-muted-foreground">
       <div className="container mx-auto px-4 py-12 md:px-6">
