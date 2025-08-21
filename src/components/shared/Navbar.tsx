@@ -11,15 +11,14 @@ import {
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 const navLinks = [
-  { href: "#features", label: "Features" },
-  { href: "#how-it-works", label: "How It Works" },
-  { href: "#testimonials", label: "Testimonials" },
+  // { href: "#features", label: "Features" },
+  // { href: "#how-it-works", label: "How It Works" },
+  // { href: "#testimonials", label: "Testimonials" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
   { href: "/faq", label: "FAQ" },
@@ -27,22 +26,25 @@ const navLinks = [
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center">
+    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
+      <div className="container mx-auto flex h-16 items-center justify-between px-3">
         {/* Logo and Brand Name */}
         <Link href="/" className="mr-6 flex items-center space-x-2">
           <Car className="h-6 w-6" />
-          <span className="font-bold inline-block">RideSwift</span>
+          <span className="inline-block font-bold">RideSwift</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <NavigationMenu className="hidden md:flex">
+        <NavigationMenu className="hidden flex-1 items-center md:flex">
           <NavigationMenuList>
             {navLinks.map((link) => (
-              <NavigationMenuItem key={link.href}>
+              <NavigationMenuItem
+                key={link.href}
+                className="flex items-center justify-center"
+              >
                 <Link
                   href={link.href}
-                  className="px-3 block py-1 hover:bg-accent"
+                  className="hover:bg-accent block rounded-2xl px-3 py-1"
                 >
                   {link.label}
                 </Link>
@@ -51,7 +53,7 @@ export function Navbar() {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="flex flex-1 items-center justify-end space-x-4">
+        <div className="flex items-center justify-end space-x-4">
           {/* Desktop Sign In Button */}
           <Button className="hidden md:inline-flex">Sign In</Button>
 
@@ -59,13 +61,14 @@ export function Navbar() {
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-6 w-6" />
+                <Button variant="ghost" size="default" className="">
+                  <Menu />
                   <span className="sr-only">Toggle navigation menu</span>
                 </Button>
               </SheetTrigger>
               <SheetContent side="right">
-                <div className="grid gap-4 py-6">
+                <DialogTitle className="sr-only">Navigation Menu</DialogTitle>
+                <div className="grid gap-4 px-3 py-6">
                   {/* Mobile Logo */}
                   <Link href="/" className="flex items-center space-x-2 px-4">
                     <Car className="h-6 w-6" />
@@ -76,7 +79,7 @@ export function Navbar() {
                     <SheetClose asChild key={link.href}>
                       <Link
                         href={link.href}
-                        className="flex items-center rounded-lg py-2 px-4 text-lg font-semibold hover:bg-accent"
+                        className="hover:bg-accent flex items-center rounded-lg px-4 py-2 text-lg font-semibold"
                       >
                         {link.label}
                       </Link>
