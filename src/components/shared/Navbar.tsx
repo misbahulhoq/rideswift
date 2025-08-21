@@ -14,6 +14,7 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { ThemeToggler } from "./ThemeTogger";
 
 const navLinks = [
   // { href: "#features", label: "Features" },
@@ -53,47 +54,51 @@ export function Navbar() {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="flex items-center justify-end space-x-4">
-          {/* Desktop Sign In Button */}
-          <Button className="hidden md:inline-flex">Sign In</Button>
+        <div className="flex items-center lg:gap-3">
+          <ThemeToggler />
 
-          {/* Mobile Navigation */}
-          <div className="md:hidden">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="default" className="">
-                  <Menu />
-                  <span className="sr-only">Toggle navigation menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right">
-                <DialogTitle className="sr-only">Navigation Menu</DialogTitle>
-                <div className="grid gap-4 px-3 py-6">
-                  {/* Mobile Logo */}
-                  <Link href="/" className="flex items-center space-x-2 px-4">
-                    <Car className="h-6 w-6" />
-                    <span className="font-bold">RideSwift</span>
-                  </Link>
-                  {/* Mobile Nav Links */}
-                  {navLinks.map((link) => (
-                    <SheetClose asChild key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="hover:bg-accent flex items-center rounded-lg px-4 py-2 text-lg font-semibold"
-                      >
-                        {link.label}
+          <div className="flex items-center justify-end space-x-4">
+            {/* Desktop Sign In Button */}
+            <Button className="hidden md:inline-flex">Sign In</Button>
+
+            {/* Mobile Navigation */}
+            <div className="md:hidden">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="default" className="">
+                    <Menu />
+                    <span className="sr-only">Toggle navigation menu</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right">
+                  <DialogTitle className="sr-only">Navigation Menu</DialogTitle>
+                  <div className="grid gap-4 px-3 py-6">
+                    {/* Mobile Logo */}
+                    <Link href="/" className="flex items-center space-x-2 px-4">
+                      <Car className="h-6 w-6" />
+                      <span className="font-bold">RideSwift</span>
+                    </Link>
+                    {/* Mobile Nav Links */}
+                    {navLinks.map((link) => (
+                      <SheetClose asChild key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="hover:bg-accent flex items-center rounded-lg px-4 py-2 text-lg font-semibold"
+                        >
+                          {link.label}
+                        </Link>
+                      </SheetClose>
+                    ))}
+                    <hr className="my-2" />
+                    <SheetClose asChild>
+                      <Link href="/login">
+                        <Button className="w-full">Sign In</Button>
                       </Link>
                     </SheetClose>
-                  ))}
-                  <hr className="my-2" />
-                  <SheetClose asChild>
-                    <Link href="/login">
-                      <Button className="w-full">Sign In</Button>
-                    </Link>
-                  </SheetClose>
-                </div>
-              </SheetContent>
-            </Sheet>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
         </div>
       </div>
