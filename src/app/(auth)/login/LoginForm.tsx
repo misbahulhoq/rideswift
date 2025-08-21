@@ -1,12 +1,9 @@
-// src/components/auth/LoginForm.tsx
-
 "use client";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Link from "next/link";
-import { Chrome } from "lucide-react"; // Or any other icon library
 
 import { Button } from "@/components/ui/button";
 import {
@@ -91,7 +88,6 @@ export function LoginForm() {
                   <FormLabel>Password</FormLabel>
                   <FormControl>
                     <PasswordInput field={field} />
-                    {/* <Input type="password" {...field} /> */}
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -100,11 +96,6 @@ export function LoginForm() {
 
             <Button type="submit" className="w-full">
               Login
-            </Button>
-
-            <Button variant="outline" className="w-full">
-              <Chrome className="mr-2 h-4 w-4" />
-              Login with Google
             </Button>
           </form>
         </Form>

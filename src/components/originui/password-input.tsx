@@ -7,16 +7,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ControllerRenderProps } from "react-hook-form";
 
+interface PasswordInputProps extends React.HTMLAttributes<HTMLInputElement> {}
 export default function PasswordInput({
   field,
 }: {
-  field: ControllerRenderProps<
-    {
-      email: string;
-      password: string;
-    },
-    "password"
-  >;
+  field: PasswordInputProps;
 }) {
   const id = useId();
   const [isVisible, setIsVisible] = useState<boolean>(false);

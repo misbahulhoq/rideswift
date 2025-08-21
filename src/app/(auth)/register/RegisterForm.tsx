@@ -25,6 +25,7 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import PasswordInput from "@/components/originui/password-input";
 export type RegisterFormValues = z.infer<typeof formSchema>;
 
 // Validation Schema
@@ -172,7 +173,7 @@ export function RegisterForm({ role }: { role: "rider" | "driver" }) {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" {...field} />
+                    <PasswordInput field={field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -187,7 +188,7 @@ export function RegisterForm({ role }: { role: "rider" | "driver" }) {
                 <FormItem>
                   <FormLabel>Confirm Password</FormLabel>
                   <FormControl>
-                    <Input type="password" {...field} />
+                    <PasswordInput field={field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
