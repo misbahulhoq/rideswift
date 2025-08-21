@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar } from "./shared/Navbar";
 import { ThemeProvider } from "./ThemeProvider";
+import { Footer } from "./shared/Footer";
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -12,6 +13,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
     >
       <Navbar />
       {children}
+      <Footer />
     </ThemeProvider>
   );
 };
