@@ -1,3 +1,5 @@
+import { RideRequestForm } from "./RideRequestForm";
+
 export default function RiderDashboardPage() {
   return (
     <div>
@@ -8,9 +10,7 @@ export default function RiderDashboardPage() {
 
       {/* The Ride Request Form will go here in the next step */}
       <div className="mt-8 rounded-lg border-2 border-dashed p-8">
-        <p className="text-muted-foreground text-center">
-          Ride Request Form Placeholder
-        </p>
+        <RideRequestForm />
       </div>
     </div>
   );
