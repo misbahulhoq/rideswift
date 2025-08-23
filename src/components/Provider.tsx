@@ -1,9 +1,11 @@
+"use client";
 import React from "react";
 import { Navbar } from "./shared/Navbar";
 import { ThemeProvider } from "./ThemeProvider";
 import { Footer } from "./shared/Footer";
-
-const Provider = ({ children }: { children: React.ReactNode }) => {
+import { Provider } from "react-redux";
+import { store } from "@/redux/store";
+const AppProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <ThemeProvider
       attribute="class"
@@ -11,11 +13,13 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
       enableSystem
       disableTransitionOnChange
     >
-      <Navbar />
-      {children}
-      <Footer />
+      <Provider store={store}>
+        <Navbar />
+        {children}
+        <Footer />
+      </Provider>
     </ThemeProvider>
   );
 };
 
-export default Provider;
+export default AppProvider;
