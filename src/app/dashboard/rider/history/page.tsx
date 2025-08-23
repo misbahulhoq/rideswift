@@ -1,4 +1,4 @@
-import { getRideHistory, Ride } from "@/lib/ride-data";
+import { getRideHistory } from "@/lib/ride-data";
 import { DataTable } from "@/components/ui/data-table";
 import { columns } from "./RiderHistoryColumns";
 

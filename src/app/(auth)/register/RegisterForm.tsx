@@ -72,7 +72,7 @@ export function RegisterForm({ role }: { role: "rider" | "driver" }) {
   const router = useRouter();
   useEffect(() => {
     router.push(`/register?role=${roleValue}`);
-  }, [roleValue]);
+  }, [roleValue, router]);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     // NOTE: Here you would typically handle the API call for registration.

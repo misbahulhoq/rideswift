@@ -56,7 +56,8 @@ export function Testimonials() {
             Trusted by Riders and Drivers
           </h2>
           <p className="text-muted-foreground mx-auto mt-4 max-w-[700px] md:text-xl/relaxed">
-            Here's what some of our users have to say about their experience.
+            Here&apos;s what some of our users have to say about their
+            experience.
           </p>
         </div>
 

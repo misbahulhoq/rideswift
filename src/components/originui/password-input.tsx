@@ -1,13 +1,9 @@
 "use client";
-
 import { useId, useState } from "react";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ControllerRenderProps } from "react-hook-form";
 
-interface PasswordInputProps extends React.HTMLAttributes<HTMLInputElement> {}
+type PasswordInputProps = React.HTMLAttributes<HTMLInputElement>;
 export default function PasswordInput({
   field,
 }: {

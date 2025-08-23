@@ -1,10 +1,8 @@
-// src/app/dashboard/layout.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+// import { useRouter } from "next/navigation";
 // import { useAuth } from "@/hooks/useAuth";
-import { Loader2 } from "lucide-react";
 import { RiderSidebar } from "./rider/RiderSidebar";
 import { DashboardNavbar } from "./DashboardNav";
 
@@ -12,11 +10,11 @@ import { DashboardNavbar } from "./DashboardNav";
 // import { DriverSidebar } from "@/components/dashboard/DriverSidebar";
 // import { AdminSidebar } from "@/components/dashboard/AdminSidebar";
 
-const sidebars = {
-  rider: <RiderSidebar />,
-  // driver: <DriverSidebar />,
-  // admin: <AdminSidebar />,
-};
+// const sidebars = {
+//   rider: <RiderSidebar />,
+//   // driver: <DriverSidebar />,
+//   // admin: <AdminSidebar />,
+// };
 
 export default function DashboardLayout({
   children,
@@ -24,10 +22,8 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   // const { user, isLoading } = useAuth();
-  const router = useRouter();
-  const [activeSidebar, setActiveSidebar] = useState<React.ReactNode>(
-    <RiderSidebar />,
-  );
+  // const router = useRouter();
+  const [activeSidebar] = useState<React.ReactNode>(<RiderSidebar />);
 
   // useEffect(() => {
   //   if (!isLoading && !user) {
