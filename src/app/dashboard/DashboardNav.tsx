@@ -15,6 +15,9 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import React from "react";
 import { ThemeToggler } from "@/components/shared/ThemeTogger";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { useLogoutMutation } from "@/redux/features/auth/authApiSlice";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 // Define the shape of the user prop
 interface User {
@@ -28,6 +31,23 @@ interface DashboardNavbarProps {
 }
 
 export function DashboardNavbar({ user, sidebar }: DashboardNavbarProps) {
+  const [logout] = useLogoutMutation();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await logout()
+      .unwrap()
+      .then((res) => {
+        if (res.success)
+          Swal.fire({
+            icon: "success",
+            title: "Logout Successfull.",
+            text: "Redirecting to home page.",
+          });
+        router.push("/");
+      });
+  };
+
   return (
     <header className="bg-background sticky top-0 z-40 flex h-16 items-center gap-4 border-b px-4 md:px-6">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
@@ -83,7 +103,9 @@ export function DashboardNavbar({ user, sidebar }: DashboardNavbarProps) {
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem>
+              <button onClick={handleLogout}>Logout</button>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
