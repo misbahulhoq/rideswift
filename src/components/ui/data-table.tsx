@@ -1,6 +1,4 @@
-// src/components/ui/data-table.tsx
 "use client";
-
 import {
   ColumnDef,
   flexRender,
@@ -64,6 +62,7 @@ export function DataTable<TData, TValue>({
 
       {/* --- DESKTOP VIEW --- */}
       <div className="hidden rounded-md border md:block">
+        {/* ... Desktop table code remains the same ... */}
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -120,9 +119,8 @@ export function DataTable<TData, TValue>({
           table.getRowModel().rows.map((row) => (
             <Card key={row.id} className="w-full">
               <CardHeader>
-                <CardTitle className="flex items-center justify-between">
+                <CardTitle className="flex items-center justify-between text-base">
                   <span>Ride ID: {(row.original as any).id}</span>
-                  {/* Render the 'actions' cell if it exists */}
                   {row.getVisibleCells().map((cell) => {
                     if (cell.column.id === "actions") {
                       return (
@@ -138,27 +136,22 @@ export function DataTable<TData, TValue>({
                   })}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2">
+              <CardContent className="space-y-3 text-sm">
                 {row.getVisibleCells().map((cell) => {
-                  // Don't render ID or actions again in the main content
-                  if (
-                    cell.column.id === "actions" ||
-                    cell.column.accessorKey === "id"
-                  )
-                    return null;
+                  if (cell.column.id === "actions") return null;
 
                   return (
                     <div
                       key={cell.id}
-                      className="flex justify-between border-b pb-2"
+                      className="flex justify-between border-b pb-2 last:border-none last:pb-0"
                     >
                       <span className="text-muted-foreground font-semibold">
-                        {flexRender(
-                          cell.column.columnDef.header,
-                          cell.getContext(),
-                        )}
+                        {/* --- THIS IS THE CORRECTED LINE --- */}
+                        {/* We render the header directly as a string, avoiding the context mismatch */}
+                        {String(cell.column.columnDef.header)}
+                        {/* ---------------------------------- */}
                       </span>
-                      <span>
+                      <span className="text-right">
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext(),
@@ -177,6 +170,7 @@ export function DataTable<TData, TValue>({
 
       {/* --- PAGINATION (Visible on all screen sizes) --- */}
       <div className="flex items-center justify-end space-x-2 py-4">
+        {/* ... Pagination code remains the same ... */}
         <Button
           variant="outline"
           size="sm"
