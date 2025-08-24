@@ -28,7 +28,7 @@ export default function DashboardLayout({
   const { user, isUserInfoRetrieving } = useAuth();
   const [logout] = useLogoutMutation();
   const pathName = usePathname();
-  const visitedRole = pathName.split("/dashboard/")[1];
+  console.log(pathName);
 
   useEffect(() => {
     if (!isUserInfoRetrieving && !user) {
@@ -37,8 +37,8 @@ export default function DashboardLayout({
     if (
       !isUserInfoRetrieving &&
       user &&
-      visitedRole &&
-      visitedRole !== user?.role
+      pathName! == "/dashboard" &&
+      !pathName.includes(user.role)
     ) {
       logout()
         .unwrap()
@@ -61,7 +61,7 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="grid h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       {/* Desktop Sidebar */}
       <div className="bg-muted/40 hidden border-r md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">

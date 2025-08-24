@@ -19,6 +19,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React from "react";
@@ -60,7 +61,9 @@ export function DataTable<TData, TValue>({
           className="max-w-sm"
         />
       </div>
-      <div className="rounded-md border">
+
+      {/* --- DESKTOP VIEW --- */}
+      <div className="hidden rounded-md border md:block">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -110,6 +113,69 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
+
+      {/* --- MOBILE CARD VIEW --- */}
+      <div className="grid grid-cols-1 gap-4 md:hidden">
+        {table.getRowModel().rows?.length ? (
+          table.getRowModel().rows.map((row) => (
+            <Card key={row.id} className="w-full">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  <span>Ride ID: {(row.original as any).id}</span>
+                  {/* Render the 'actions' cell if it exists */}
+                  {row.getVisibleCells().map((cell) => {
+                    if (cell.column.id === "actions") {
+                      return (
+                        <div key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </div>
+                      );
+                    }
+                    return null;
+                  })}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                {row.getVisibleCells().map((cell) => {
+                  // Don't render ID or actions again in the main content
+                  if (
+                    cell.column.id === "actions" ||
+                    cell.column.accessorKey === "id"
+                  )
+                    return null;
+
+                  return (
+                    <div
+                      key={cell.id}
+                      className="flex justify-between border-b pb-2"
+                    >
+                      <span className="text-muted-foreground font-semibold">
+                        {flexRender(
+                          cell.column.columnDef.header,
+                          cell.getContext(),
+                        )}
+                      </span>
+                      <span>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </span>
+                    </div>
+                  );
+                })}
+              </CardContent>
+            </Card>
+          ))
+        ) : (
+          <div className="py-10 text-center">No results.</div>
+        )}
+      </div>
+
+      {/* --- PAGINATION (Visible on all screen sizes) --- */}
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
           variant="outline"
