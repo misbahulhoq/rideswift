@@ -26,7 +26,24 @@ const authApi = baseApi.injectEndpoints({
         body: credentials,
       }),
     }),
+    logout: builder.mutation<IApiResponse, void>({
+      query: () => ({
+        url: "/auth/logout",
+        method: "POST",
+      }),
+    }),
+    getCurrentUser: builder.query<IApiResponse, void>({
+      query: () => ({
+        url: "/auth/me",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useSignUpMutation, useLoginMutation } = authApi;
+export const {
+  useSignUpMutation,
+  useLoginMutation,
+  useLogoutMutation,
+  useGetCurrentUserQuery,
+} = authApi;
