@@ -10,7 +10,7 @@ const authApi = baseApi.injectEndpoints({
         name: string;
         password: string;
         role: "driver" | "rider";
-        vehicleInfo?: string;
+        vehicleInfo?: { model?: string; licensePlate?: string };
       }
     >({
       query: (credentials) => ({

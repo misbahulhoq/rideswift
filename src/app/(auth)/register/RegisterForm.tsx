@@ -27,6 +27,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import PasswordInput from "@/components/originui/password-input";
 import { useSignUpMutation } from "@/redux/features/auth/authApiSlice";
+import { Separator } from "@/components/ui/separator";
 export type RegisterFormValues = z.infer<typeof formSchema>;
 
 // Validation Schema
@@ -46,14 +47,31 @@ const formSchema = z
       message: "Password must be at least 8 characters.",
     }),
     confirmPassword: z.string(),
+    vehicleModel: z.string().optional(),
+    licensePlate: z.string().optional(),
   })
-  .refine(
-    (data: RegisterFormValues) => data.password === data.confirmPassword,
-    {
-      message: "Passwords do not match.",
-      path: ["confirmPassword"], // path of error
-    },
-  );
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match.",
+    path: ["confirmPassword"], // path of error
+  })
+  .superRefine((data, ctx) => {
+    if (data.role === "driver") {
+      if (!data.vehicleModel || data.vehicleModel.length < 3) {
+        ctx.addIssue({
+          code: "custom",
+          message: "Vehicle model is required.",
+          path: ["vehicleModel"],
+        });
+      }
+      if (!data.licensePlate || data.licensePlate.length < 3) {
+        ctx.addIssue({
+          code: "custom",
+          message: "License plate is required",
+          path: ["licensePlate"],
+        });
+      }
+    }
+  });
 
 export function RegisterForm({ role }: { role: "rider" | "driver" }) {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -62,9 +80,10 @@ export function RegisterForm({ role }: { role: "rider" | "driver" }) {
       role: role || "rider", // Default role
       name: "",
       email: "",
-
       password: "",
       confirmPassword: "",
+      vehicleModel: "",
+      licensePlate: "",
     },
   });
   const roleValue = form.watch("role");
@@ -81,6 +100,12 @@ export function RegisterForm({ role }: { role: "rider" | "driver" }) {
       password: values.password,
       role: values.role,
       name: values.name,
+      ...(role === "driver" && {
+        vehicleInfo: {
+          model: values.vehicleModel,
+          licensePlate: values.licensePlate,
+        },
+      }),
     })
       .unwrap()
       .then((res) => {
@@ -202,6 +227,45 @@ export function RegisterForm({ role }: { role: "rider" | "driver" }) {
                 </FormItem>
               )}
             />
+
+            {role === "driver" && (
+              <>
+                <Separator />
+                <h3 className="text-muted-foreground pt-2 text-sm font-medium">
+                  Driver Information
+                </h3>
+
+                {/* Vehicle Model */}
+                <FormField
+                  control={form.control}
+                  name="vehicleModel"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Vehicle Model</FormLabel>
+                      <FormControl>
+                        <Input placeholder="e.g., Toyota Corolla" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* License Plate */}
+                <FormField
+                  control={form.control}
+                  name="licensePlate"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>License Plate</FormLabel>
+                      <FormControl>
+                        <Input placeholder="e.g., DHAKA-MA-1234" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </>
+            )}
 
             <Button type="submit" className="w-full" disabled={isLoading}>
               Create an account
