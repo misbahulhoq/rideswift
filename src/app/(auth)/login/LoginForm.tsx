@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Link from "next/link";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -23,6 +22,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import PasswordInput from "@/components/originui/password-input";
+import { useLoginMutation } from "@/redux/features/auth/authApiSlice";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 // Validation Schema
 const formSchema = z.object({
@@ -42,11 +44,26 @@ export function LoginForm() {
       password: "",
     },
   });
+  const router = useRouter();
+  const [login, { isLoading }] = useLoginMutation();
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // NOTE: Here you would handle the API call for authentication.
-    console.log(values);
-    alert("Login submitted! Check the console for the form data.");
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    login(values)
+      .unwrap()
+      .then((res) => {
+        if (res.success) {
+          Swal.fire({
+            icon: "success",
+            title: "Login successfull",
+            text: "Redirecting to dashboard.",
+          }).then(() => {
+            router.push(`/dashboard/${res.data.user.role}`);
+          });
+        } else {
+          Swal.fire({ icon: "error", title: "OOPS.", titleText: res.message });
+        }
+      })
+      .catch(console.error);
   }
 
   return (
@@ -94,7 +111,7 @@ export function LoginForm() {
               )}
             />
 
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full" disabled={isLoading}>
               Login
             </Button>
           </form>
