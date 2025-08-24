@@ -34,7 +34,12 @@ export default function DashboardLayout({
     if (!isUserInfoRetrieving && !user) {
       router.push("/login");
     }
-    if (!isUserInfoRetrieving && user && visitedRole !== user?.role) {
+    if (
+      !isUserInfoRetrieving &&
+      user &&
+      visitedRole &&
+      visitedRole !== user?.role
+    ) {
       logout()
         .unwrap()
         .then(() => {
