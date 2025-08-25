@@ -19,12 +19,14 @@ import { ThemeToggler } from "./ThemeTogger";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
-  // { href: "#features", label: "Features" },
-  // { href: "#how-it-works", label: "How It Works" },
-  // { href: "#testimonials", label: "Testimonials" },
+  { href: "#features", label: "Features" },
+  { href: "#how-it-works", label: "How It Works" },
+  { href: "#testimonials", label: "Testimonials" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
   { href: "/faq", label: "FAQ" },
+  // { href: "/privacy", label: "Privacy Policy" },
+  // { href: "/terms", label: "Terms of Service" },
 ];
 
 export function Navbar() {
@@ -44,7 +46,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <NavigationMenu className="hidden flex-1 items-center md:flex">
+        <NavigationMenu className="hidden flex-1 items-center lg:flex">
           <NavigationMenuList>
             {navLinks.map((link) => (
               <NavigationMenuItem
@@ -67,10 +69,10 @@ export function Navbar() {
 
           <div className="flex items-center justify-end space-x-4">
             {/* Desktop Sign In Button */}
-            <Button className="hidden md:inline-flex">Sign In</Button>
+            <Button className="hidden lg:inline-flex">Sign In</Button>
 
             {/* Mobile Navigation */}
-            <div className="md:hidden">
+            <div className="lg:hidden">
               <Sheet>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="default" className="">
