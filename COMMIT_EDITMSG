@@ -1,7 +1,7 @@
-fix(error-handling): Improve API error feedback
+feat(rider): Update fare simulation and add ride history API
 
-Enhances error handling for API calls in the login form and ride request form.
+This commit introduces updates to the ride fare simulation and adds functionality to fetch ride history:
 
-- Displays specific error messages from the API response using SweetAlert2 for better user feedback.
-- Ensures the login mutation is properly awaited.
-- Adds console logs for debugging API responses.
+- **Fare Simulation Update:** The simulated fare calculation in the `RideRequestForm` now generates a random fare between 100 and 500.
+- **Currency Localization:** The displayed currency symbol has been changed from `$` to `৳` in the `RideRequestForm` and `RiderHistoryColumns` to reflect BDT.
+- **Ride History API:** A new `getRide` query endpoint has been added to `riderApiSlice` to fetch the rider's ride history from `/rides/my-history`.

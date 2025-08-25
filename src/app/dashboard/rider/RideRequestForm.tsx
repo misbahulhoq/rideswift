@@ -71,7 +71,7 @@ export function RideRequestForm() {
       setIsCalculating(true);
       // Simulate an API call for fare estimation
       const timer = setTimeout(() => {
-        const fare = Math.floor(Math.random() * (50 - 10 + 1)) + 10; // Random fare between $10 and $50
+        const fare = Math.floor(Math.random() * (500 - 100 + 1)) + 100; // Random fare between 100 and 500
         setEstimatedFare(fare);
         setIsCalculating(false);
       }, 1000); // 1-second delay
@@ -200,7 +200,7 @@ export function RideRequestForm() {
                 {isCalculating ? (
                   <span className="text-sm">Calculating...</span>
                 ) : fare !== null ? (
-                  <span className="text-lg font-bold">${fare.toFixed(2)}</span>
+                  <span className="text-lg font-bold">৳{fare.toFixed(2)}</span>
                 ) : (
                   <span className="text-muted-foreground text-sm">--</span>
                 )}

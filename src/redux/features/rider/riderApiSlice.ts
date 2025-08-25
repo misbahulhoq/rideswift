@@ -11,7 +11,13 @@ const riderApiSlice = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    getRide: builder.query({
+      query: () => ({
+        url: "/rides/my-history",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useRequestRideMutation } = riderApiSlice;
+export const { useRequestRideMutation, useGetRideQuery } = riderApiSlice;

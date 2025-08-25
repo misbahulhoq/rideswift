@@ -44,7 +44,7 @@ export const columns: ColumnDef<Ride>[] = [
       const amount = parseFloat(row.getValue("fare"));
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "USD",
+        currency: "BDT",
       }).format(amount);
       return <div className="font-medium">{formatted}</div>;
     },
