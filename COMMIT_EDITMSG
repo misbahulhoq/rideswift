@@ -1,7 +1,8 @@
-feat(rider): Update fare simulation and add ride history API
+feat(dashboard): Implement user profile management and refactor ride history
 
-This commit introduces updates to the ride fare simulation and adds functionality to fetch ride history:
+This commit significantly enhances the dashboard experience by introducing user profile management and streamlining the ride history display.
 
-- **Fare Simulation Update:** The simulated fare calculation in the `RideRequestForm` now generates a random fare between 100 and 500.
-- **Currency Localization:** The displayed currency symbol has been changed from `$` to `৳` in the `RideRequestForm` and `RiderHistoryColumns` to reflect BDT.
-- **Ride History API:** A new `getRide` query endpoint has been added to `riderApiSlice` to fetch the rider's ride history from `/rides/my-history`.
+- **User Profile Management:** A new `ProfileForm` component has been added, allowing users to update their personal details and change passwords. The main dashboard page (`/dashboard`) now serves as the central hub for profile management.
+- **Refactored Ride History:** The generic `DataTable` has been replaced with a dedicated `RideHistoryTable` component for displaying ride history. This new component supports both desktop (table) and mobile (card) views, and the `RiderHistoryColumns` file has been removed, with its logic integrated into the new table component.
+- **Dashboard Layout Update:** The dashboard layout's authentication logic has been updated to correctly allow access to the profile page (`/dashboard/profile`) without triggering role-based redirection.
+- **API Enhancements:** The `getRide` query in `riderApiSlice` now explicitly defines its return and argument types for improved type safety.

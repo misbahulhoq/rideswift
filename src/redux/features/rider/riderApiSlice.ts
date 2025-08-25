@@ -11,7 +11,7 @@ const riderApiSlice = baseApi.injectEndpoints({
         body: data,
       }),
     }),
-    getRide: builder.query({
+    getRide: builder.query<IApiResponse, void>({
       query: () => ({
         url: "/rides/my-history",
         method: "GET",

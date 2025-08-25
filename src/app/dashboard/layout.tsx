@@ -32,7 +32,11 @@ export default function DashboardLayout({
       if (!isUserInfoRetrieving) {
         if (!user) {
           router.push("/login");
-        } else if (pathName !== "/dashboard" && !pathName.includes(user.role)) {
+        } else if (
+          pathName !== "/dashboard" &&
+          pathName !== "/dashboard/profile" &&
+          !pathName.includes(user.role)
+        ) {
           logout().then(() => {
             router.push("/login");
           });

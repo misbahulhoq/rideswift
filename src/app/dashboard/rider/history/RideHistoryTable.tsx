@@ -1,4 +1,3 @@
-// src/components/dashboard/rider/RideHistoryTable.tsx
 "use client";
 
 import {
