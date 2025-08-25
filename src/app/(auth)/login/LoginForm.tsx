@@ -48,9 +48,10 @@ export function LoginForm() {
   const [login, { isLoading }] = useLoginMutation();
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    login(values)
+    await login(values)
       .unwrap()
       .then((res) => {
+        console.log(res);
         if (res.success) {
           Swal.fire({
             icon: "success",
@@ -62,7 +63,9 @@ export function LoginForm() {
           Swal.fire({ icon: "error", title: "OOPS.", text: res?.message });
         }
       })
-      .catch(console.error);
+      .catch((err) => {
+        Swal.fire({ icon: "error", title: "OOPS.", text: err?.data?.message });
+      });
   }
 
   return (

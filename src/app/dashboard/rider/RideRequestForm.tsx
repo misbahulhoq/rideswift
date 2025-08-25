@@ -97,7 +97,14 @@ export function RideRequestForm() {
           });
         }
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Ride request failed.",
+          text: err?.data?.message,
+        });
+      });
   }
 
   return (
