@@ -19,11 +19,12 @@ export default function TermsOfServicePage() {
           <div className="space-y-2">
             <h2 className="text-2xl font-bold">1. Acceptance of Terms</h2>
             <p className="text-muted-foreground">
-              By accessing or using the RideSwift platform ("Service"), you
-              agree to be bound by these Terms of Service ("Terms"). If you
-              disagree with any part of the terms, then you may not access the
-              Service. These Terms apply to all visitors, users, and others who
-              access or use the Service, including Riders and Drivers.
+              By accessing or using the RideSwift platform
+              (&quot;Service&quot;), you agree to be bound by these Terms of
+              Service (&quot;Terms&quot;). If you disagree with any part of the
+              terms, then you may not access the Service. These Terms apply to
+              all visitors, users, and others who access or use the Service,
+              including Riders and Drivers.
             </p>
           </div>
 
@@ -67,11 +68,11 @@ export default function TermsOfServicePage() {
             <h2 className="text-2xl font-bold">5. Payment</h2>
             <p className="text-muted-foreground">
               You understand that use of the Services may result in charges to
-              you for the services you receive from a Driver ("Charges").
-              Charges will be inclusive of applicable taxes where required by
-              law. All Charges are due immediately and payment will be
-              facilitated by RideSwift using the preferred payment method
-              designated in your account.
+              you for the services you receive from a Driver
+              (&quot;Charges&quot;). Charges will be inclusive of applicable
+              taxes where required by law. All Charges are due immediately and
+              payment will be facilitated by RideSwift using the preferred
+              payment method designated in your account.
             </p>
           </div>
 
@@ -80,13 +81,14 @@ export default function TermsOfServicePage() {
               6. Disclaimers; Limitation of Liability
             </h2>
             <p className="text-muted-foreground">
-              THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE." RIDESWIFT
-              DISCLAIMS ALL REPRESENTATIONS AND WARRANTIES, EXPRESS, IMPLIED, OR
-              STATUTORY. IN NO EVENT SHALL RIDESWIFT BE LIABLE FOR ANY INDIRECT,
-              INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE, OR CONSEQUENTIAL
-              DAMAGES, INCLUDING LOST PROFITS, LOST DATA, PERSONAL INJURY, OR
-              PROPERTY DAMAGE RELATED TO, IN CONNECTION WITH, OR OTHERWISE
-              RESULTING FROM ANY USE OF THE SERVICES.
+              THE SERVICE IS PROVIDED &quot;AS IS&quot; AND &quot;AS
+              AVAILABLE.&quot; RIDESWIFT DISCLAIMS ALL REPRESENTATIONS AND
+              WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY. IN NO EVENT SHALL
+              RIDESWIFT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL,
+              EXEMPLARY, PUNITIVE, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST
+              PROFITS, LOST DATA, PERSONAL INJURY, OR PROPERTY DAMAGE RELATED
+              TO, IN CONNECTION WITH, OR OTHERWISE RESULTING FROM ANY USE OF THE
+              SERVICES.
             </p>
           </div>
 

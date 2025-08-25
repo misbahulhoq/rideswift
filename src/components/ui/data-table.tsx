@@ -120,6 +120,7 @@ export function DataTable<TData, TValue>({
             <Card key={row.id} className="w-full">
               <CardHeader>
                 <CardTitle className="flex items-center justify-between text-base">
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                   <span>Ride ID: {(row.original as any).id}</span>
                   {row.getVisibleCells().map((cell) => {
                     if (cell.column.id === "actions") {

@@ -50,7 +50,7 @@ export default function DashboardLayout({
     //   // Set the active sidebar based on user role
     //   setActiveSidebar(sidebars[user.role as keyof typeof sidebars]);
     // }
-  }, [user, isUserInfoRetrieving, router]);
+  }, [user, isUserInfoRetrieving, router, logout, pathName]);
 
   if (isUserInfoRetrieving || !user) {
     return (

@@ -118,7 +118,7 @@ export default function PrivacyPolicyPage() {
             <p className="text-muted-foreground">
               We may update this Privacy Policy from time to time. We will
               notify you of any changes by posting the new Privacy Policy on
-              this page and updating the "Last Updated" date.
+              this page and updating the &quot;Last Updated&quot; date.
             </p>
           </div>
 

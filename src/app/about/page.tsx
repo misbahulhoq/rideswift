@@ -41,8 +41,8 @@ export default function AboutPage() {
             About RideSwift
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg md:text-xl">
-            We're revolutionizing urban transportation by connecting riders and
-            drivers through technology.
+            We&apos;re revolutionizing urban transportation by connecting riders
+            and drivers through technology.
           </p>
         </div>
       </section>
@@ -96,8 +96,8 @@ export default function AboutPage() {
               the inefficiencies of traditional transport, our founders set out
               to build a platform that was not only convenient but also
               empowered local drivers with flexible earning opportunities.
-              Today, we're proud to serve thousands of users across the city,
-              and we're just getting started.
+              Today, we&apos;re proud to serve thousands of users across the
+              city, and we&apos;re just getting started.
             </p>
           </div>
         </div>
@@ -115,8 +115,9 @@ export default function AboutPage() {
                 The People Behind the Platform
               </h2>
               <p className="text-muted-foreground max-w-[900px] md:text-xl lg:text-base xl:text-xl">
-                We're a diverse team of innovators, thinkers, and doers, united
-                by a common goal to make transportation better for everyone.
+                We&apos;re a diverse team of innovators, thinkers, and doers,
+                united by a common goal to make transportation better for
+                everyone.
               </p>
             </div>
           </div>

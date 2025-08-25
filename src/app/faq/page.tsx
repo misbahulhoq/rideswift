@@ -10,7 +10,7 @@ export default function FaqPage() {
             Frequently Asked Questions
           </h1>
           <p className="text-muted-foreground mx-auto mt-4 max-w-2xl text-lg md:text-xl">
-            Have a question? We're here to help. Find answers to common
+            Have a question? We&apos;re here to help. Find answers to common
             questions below.
           </p>
         </div>

@@ -45,7 +45,7 @@ export function ContactForm() {
   });
 
   // Simulated submission handler
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit() {
     Swal.fire({
       icon: "success",
       title: "Message sent successfully",
