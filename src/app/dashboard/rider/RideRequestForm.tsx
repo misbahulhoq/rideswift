@@ -32,13 +32,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { useRequestRideMutation } from "@/redux/features/rider/riderApiSlice";
+import Swal from "sweetalert2";
 
 // Validation Schema
 const formSchema = z.object({
   pickupLocation: z.string().min(3, {
     message: "Pickup location must be at least 3 characters.",
   }),
-  destination: z.string().min(3, {
+  destinationLocation: z.string().min(3, {
     message: "Destination must be at least 3 characters.",
   }),
   paymentMethod: z.enum(["cash", "card"], {
@@ -47,20 +49,21 @@ const formSchema = z.object({
 });
 
 export function RideRequestForm() {
-  const [estimatedFare, setEstimatedFare] = useState<number | null>(null);
+  const [fare, setEstimatedFare] = useState<number | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
+  const [requestRide, { isLoading }] = useRequestRideMutation();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       pickupLocation: "",
-      destination: "",
+      destinationLocation: "",
     },
   });
 
   // Watch for changes in pickup and destination fields
   const pickupLocation = form.watch("pickupLocation");
-  const destination = form.watch("destination");
+  const destination = form.watch("destinationLocation");
 
   // Effect to calculate fare when both fields are valid
   useEffect(() => {
@@ -79,10 +82,22 @@ export function RideRequestForm() {
     }
   }, [pickupLocation, destination]);
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    const finalData = { ...values, estimatedFare };
-    console.log(finalData);
-    alert("Ride requested successfully! Check the console for the form data.");
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const finalData = { ...values, fare };
+    requestRide(finalData)
+      .unwrap()
+      .then((res) => {
+        if (res.success) {
+          Swal.fire({
+            icon: "success",
+            title: "Ride request successful.",
+            text: "You can view status in history.",
+          }).then(() => {
+            form.reset();
+          });
+        }
+      })
+      .catch(console.error);
   }
 
   return (
@@ -122,7 +137,7 @@ export function RideRequestForm() {
               {/* Destination */}
               <FormField
                 control={form.control}
-                name="destination"
+                name="destinationLocation"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Destination</FormLabel>
@@ -177,17 +192,19 @@ export function RideRequestForm() {
                 <span className="text-muted-foreground">Estimated Fare</span>
                 {isCalculating ? (
                   <span className="text-sm">Calculating...</span>
-                ) : estimatedFare !== null ? (
-                  <span className="text-lg font-bold">
-                    ${estimatedFare.toFixed(2)}
-                  </span>
+                ) : fare !== null ? (
+                  <span className="text-lg font-bold">${fare.toFixed(2)}</span>
                 ) : (
                   <span className="text-muted-foreground text-sm">--</span>
                 )}
               </div>
             </div>
 
-            <Button type="submit" className="w-full" disabled={!estimatedFare}>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={!fare || isLoading}
+            >
               Request Ride
             </Button>
           </form>
