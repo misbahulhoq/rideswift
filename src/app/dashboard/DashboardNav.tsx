@@ -33,6 +33,7 @@ interface DashboardNavbarProps {
 export function DashboardNavbar({ user, sidebar }: DashboardNavbarProps) {
   const [logout] = useLogoutMutation();
   const router = useRouter();
+  console.log(user);
 
   const handleLogout = async () => {
     await logout()
@@ -100,11 +101,14 @@ export function DashboardNavbar({ user, sidebar }: DashboardNavbarProps) {
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>{user?.name || "My Account"}</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
+              Profile
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <button onClick={handleLogout}>Logout</button>
+            <DropdownMenuItem className="cursor-pointer">
+              <button onClick={handleLogout} className="cursor-pointer">
+                Logout
+              </button>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

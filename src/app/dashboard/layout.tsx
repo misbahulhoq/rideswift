@@ -28,31 +28,25 @@ export default function DashboardLayout({
   const { user, isUserInfoRetrieving } = useAuth();
   const [logout] = useLogoutMutation();
   const pathName = usePathname();
-  console.log(pathName);
 
   useEffect(() => {
-    if (!isUserInfoRetrieving && !user) {
-      router.push("/login");
+    if (!isUserInfoRetrieving) {
+      if (!user) {
+        router.push("/login");
+      } else if (pathName !== "/dashboard" && !pathName.includes(user.role)) {
+        logout()
+          .unwrap()
+          .then(() => {
+            router.push("/login");
+          });
+      } else {
+        //   // Set the active sidebar based on user role
+        //   setActiveSidebar(sidebars[user.role as keyof typeof sidebars]);
+      }
     }
-    if (
-      !isUserInfoRetrieving &&
-      user &&
-      pathName! == "/dashboard" &&
-      !pathName.includes(user.role)
-    ) {
-      logout()
-        .unwrap()
-        .then(() => {
-          router.push("/login");
-        });
-    }
-    // if (user) {
-    //   // Set the active sidebar based on user role
-    //   setActiveSidebar(sidebars[user.role as keyof typeof sidebars]);
-    // }
-  }, [user, isUserInfoRetrieving, router, logout, pathName]);
+  }, [isUserInfoRetrieving, user, pathName, router, logout]);
 
-  if (isUserInfoRetrieving || !user) {
+  if (isUserInfoRetrieving) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin" />
@@ -71,10 +65,7 @@ export default function DashboardLayout({
 
       <div className="flex flex-col">
         {/* Dashboard Navbar */}
-        <DashboardNavbar
-          user={{ name: "Rider", email: "lqg3Q@example.com" }}
-          sidebar={activeSidebar}
-        />
+        <DashboardNavbar user={user} sidebar={activeSidebar} />
         {/* Main Content */}
         <main className="flex flex-1 flex-col gap-4 overflow-auto p-4 lg:gap-6 lg:p-6">
           {children}

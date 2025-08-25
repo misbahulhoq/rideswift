@@ -57,7 +57,7 @@ export function LoginForm() {
             title: "Login successfull",
             text: "Redirecting to dashboard.",
           }).then(() => {
-            router.push(`/dashboard/${res.data.user.role}`);
+            router.push(`/dashboard`);
           });
         } else {
           Swal.fire({ icon: "error", title: "OOPS.", titleText: res.message });

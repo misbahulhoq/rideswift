@@ -4,15 +4,16 @@ import React from "react";
 
 const DashboardHome = () => {
   const { user } = useAuth();
+  if (!user) return null;
   return (
     <div className="flex items-center">
       <div className="space-y-3">
         <h2 className="text-xl font-bold">
-          Hi, {user.name}. Welcome to your dashboard
+          Hi, {user?.name}. Welcome to your dashboard
         </h2>
-        <p>
-          You are {user.role === "admin" ? "an" : "a"} {user.role}. Navigate to
-          the sidebar to perform actions.
+        <p className="text-muted-foreground">
+          You are {user?.role === "admin" ? "an" : "a"} {user?.role}. Navigate
+          to the sidebar to perform actions.
         </p>
       </div>
     </div>
