@@ -15,8 +15,9 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { DialogTitle } from "@radix-ui/react-dialog";
-import { ThemeToggler } from "./ThemeTogger";
+import { ThemeToggler } from "./ThemeToggler";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
 
 const navLinks = [
   { href: "#features", label: "Features" },
@@ -31,6 +32,7 @@ const navLinks = [
 
 export function Navbar() {
   const pathName = usePathname();
+  const { user, isUserInfoRetrieving } = useAuth();
 
   if (pathName.includes("/dashboard")) {
     return null;
@@ -69,7 +71,9 @@ export function Navbar() {
 
           <div className="flex items-center justify-end space-x-4">
             {/* Desktop Sign In Button */}
-            <Button className="hidden lg:inline-flex">Sign In</Button>
+            <Button className={`hidden lg:inline-flex ${user && "hidden"}`}>
+              <Link href="/login">Sign In</Link>
+            </Button>
 
             {/* Mobile Navigation */}
             <div className="lg:hidden">

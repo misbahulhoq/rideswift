@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import React from "react";
-import { ThemeToggler } from "@/components/shared/ThemeTogger";
+import { ThemeToggler } from "@/components/shared/ThemeToggler";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useLogoutMutation } from "@/redux/features/auth/authApiSlice";
 import { useRouter } from "next/navigation";
