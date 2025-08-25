@@ -5,7 +5,6 @@ import { useRouter, usePathname } from "next/navigation";
 import { RiderSidebar } from "./rider/RiderSidebar";
 import { DashboardNavbar } from "./DashboardNav";
 import { useAuth } from "@/hooks/useAuth";
-import { useLogoutMutation } from "@/redux/features/auth/authApiSlice";
 import { Loader2 } from "lucide-react";
 
 // Import other sidebars as you create them
@@ -25,25 +24,30 @@ export default function DashboardLayout({
 }) {
   const router = useRouter();
   const [activeSidebar] = useState<React.ReactNode>(<RiderSidebar />);
-  const { user, isUserInfoRetrieving } = useAuth();
-  const [logout] = useLogoutMutation();
+  const { user, isUserInfoRetrieving, logout } = useAuth();
   const pathName = usePathname();
 
   useEffect(() => {
-    if (!isUserInfoRetrieving) {
-      if (!user) {
-        router.push("/login");
-      } else if (pathName !== "/dashboard" && !pathName.includes(user.role)) {
-        logout()
-          .unwrap()
-          .then(() => {
+    function getUserInfo() {
+      if (!isUserInfoRetrieving) {
+        if (!user) {
+          router.push("/login");
+        } else if (pathName !== "/dashboard" && !pathName.includes(user.role)) {
+          logout().then(() => {
             router.push("/login");
           });
-      } else {
-        //   // Set the active sidebar based on user role
-        //   setActiveSidebar(sidebars[user.role as keyof typeof sidebars]);
+        } else {
+          //   // Set the active sidebar based on user role
+          //   setActiveSidebar(sidebars[user.role as keyof typeof sidebars]);
+        }
       }
     }
+    const timeOutId = setTimeout(() => {
+      getUserInfo();
+    }, 2000);
+    return () => {
+      clearTimeout(timeOutId);
+    };
   }, [isUserInfoRetrieving, user, pathName, router, logout]);
 
   if (isUserInfoRetrieving) {

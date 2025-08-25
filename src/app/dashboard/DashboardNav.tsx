@@ -1,23 +1,13 @@
 "use client";
 import Link from "next/link";
-import { CircleUser, Menu, Car, Search } from "lucide-react";
+import { Menu, Car, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import React from "react";
 import { ThemeToggler } from "@/components/shared/ThemeToggler";
 import { DialogTitle } from "@radix-ui/react-dialog";
-import { useLogoutMutation } from "@/redux/features/auth/authApiSlice";
-import { useRouter } from "next/navigation";
-import Swal from "sweetalert2";
+import ProfileDropDown from "@/components/shared/ProfileDropdown";
 
 // Define the shape of the user prop
 interface User {
@@ -30,25 +20,7 @@ interface DashboardNavbarProps {
   sidebar: React.ReactNode; // Prop to pass the specific sidebar component
 }
 
-export function DashboardNavbar({ user, sidebar }: DashboardNavbarProps) {
-  const [logout] = useLogoutMutation();
-  const router = useRouter();
-  console.log(user);
-
-  const handleLogout = async () => {
-    await logout()
-      .unwrap()
-      .then((res) => {
-        if (res.success)
-          Swal.fire({
-            icon: "success",
-            title: "Logout Successfull.",
-            text: "Redirecting to home page.",
-          });
-        router.push("/");
-      });
-  };
-
+export function DashboardNavbar({ sidebar }: DashboardNavbarProps) {
   return (
     <header className="bg-background sticky top-0 z-40 flex h-16 items-center gap-4 border-b px-4 md:px-6">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
@@ -91,27 +63,7 @@ export function DashboardNavbar({ user, sidebar }: DashboardNavbarProps) {
         <ThemeToggler />
 
         {/* User Profile Dropdown */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="secondary" size="icon" className="rounded-full">
-              <CircleUser className="h-5 w-5" />
-              <span className="sr-only">Toggle user menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>{user?.name || "My Account"}</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer">
-              Profile
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer">
-              <button onClick={handleLogout} className="cursor-pointer">
-                Logout
-              </button>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <ProfileDropDown />
       </div>
     </header>
   );

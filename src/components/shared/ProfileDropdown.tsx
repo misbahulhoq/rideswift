@@ -11,28 +11,24 @@ import { CircleUser } from "lucide-react";
 import React from "react";
 import { Button } from "../ui/button";
 import { useAuth } from "@/hooks/useAuth";
-import { useLogoutMutation } from "@/redux/features/auth/authApiSlice";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const ProfileDropDown = () => {
-  const { user } = useAuth();
-  const [logout] = useLogoutMutation();
+  const { user, logout } = useAuth();
   const router = useRouter();
 
   const handleLogout = async () => {
-    await logout()
-      .unwrap()
-      .then((res) => {
-        if (res.success)
-          Swal.fire({
-            icon: "success",
-            title: "Logout successful.",
-            text: "Redirecting to home page.",
-          });
-        router.push("/");
+    await logout().then((res) => {
+      console.log(res);
+      router.push("/");
+      Swal.fire({
+        icon: "success",
+        title: "Logout successful.",
+        text: "Redirecting to home page.",
       });
+    });
   };
 
   return (
@@ -51,8 +47,10 @@ const ProfileDropDown = () => {
           <Link href="/dashboard">Dashboard</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <button onClick={handleLogout}>Logout</button>
+        <DropdownMenuItem className="cursor-pointer">
+          <button onClick={handleLogout} className="cursor-pointer">
+            Logout
+          </button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

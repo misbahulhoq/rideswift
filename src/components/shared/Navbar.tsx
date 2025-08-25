@@ -18,7 +18,6 @@ import { DialogTitle } from "@radix-ui/react-dialog";
 import { ThemeToggler } from "./ThemeToggler";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
-import { useEffect } from "react";
 
 const navLinks = [
   { href: "#features", label: "Features" },
@@ -34,8 +33,6 @@ const navLinks = [
 export function Navbar() {
   const pathName = usePathname();
   const { user, isUserInfoRetrieving } = useAuth();
-
-  useEffect(() => {}, [user, isUserInfoRetrieving, pathName]);
 
   if (pathName.includes("/dashboard")) {
     return null;

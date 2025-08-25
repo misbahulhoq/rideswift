@@ -56,11 +56,10 @@ export function LoginForm() {
             icon: "success",
             title: "Login successfull",
             text: "Redirecting to dashboard.",
-          }).then(() => {
-            router.push(`/dashboard`);
           });
+          router.push(`/dashboard`);
         } else {
-          Swal.fire({ icon: "error", title: "OOPS.", titleText: res.message });
+          Swal.fire({ icon: "error", title: "OOPS.", text: res?.message });
         }
       })
       .catch(console.error);
