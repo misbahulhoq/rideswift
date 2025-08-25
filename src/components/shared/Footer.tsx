@@ -44,12 +44,15 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/become-driver" className="hover:text-primary">
+                <Link
+                  href="/register?role=driver"
+                  className="hover:text-primary"
+                >
                   Become a Driver
                 </Link>
               </li>
               <li>
-                <Link href="/book-ride" className="hover:text-primary">
+                <Link href="/dashboard/rider" className="hover:text-primary">
                   Book a Ride
                 </Link>
               </li>

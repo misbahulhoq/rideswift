@@ -26,12 +26,12 @@ export function Hero() {
             affordable trip to your destination. Quick, easy, and reliable.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-            <Link href="/book-ride">
+            <Link href="/dashboard/rider">
               <Button size="lg" className="w-full sm:w-auto">
                 Book a Ride
               </Button>
             </Link>
-            <Link href="/become-driver">
+            <Link href="/register?role=driver">
               <Button
                 size="lg"
                 variant="secondary"
