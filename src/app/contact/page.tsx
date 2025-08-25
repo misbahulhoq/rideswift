@@ -7,7 +7,7 @@ export default function ContactPage() {
     <div>
       {/* Header Section */}
       <section className="bg-muted py-16 md:py-24">
-        <div className="container mx-auto text-center">
+        <div className="container mx-auto px-3 text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
             Get in Touch
           </h1>
@@ -20,7 +20,7 @@ export default function ContactPage() {
 
       {/* Contact Info & Form Section */}
       <section className="py-16 md:py-24">
-        <div className="container mx-auto grid grid-cols-1 gap-12 lg:grid-cols-3">
+        <div className="container mx-auto grid grid-cols-1 gap-12 px-4 lg:grid-cols-3">
           {/* Contact Information */}
           <div className="space-y-6 lg:col-span-1">
             <h2 className="text-2xl font-bold">Contact Information</h2>

@@ -5,7 +5,7 @@ export default function FaqPage() {
     <div>
       {/* Header Section */}
       <section className="bg-muted py-16 md:py-24">
-        <div className="container text-center">
+        <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
             Frequently Asked Questions
           </h1>
@@ -18,7 +18,7 @@ export default function FaqPage() {
 
       {/* FAQ Content Section */}
       <section className="py-16 md:py-24">
-        <div className="container">
+        <div className="container mx-auto px-4">
           <FaqClient />
         </div>
       </section>
