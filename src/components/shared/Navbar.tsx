@@ -71,7 +71,9 @@ export function Navbar() {
 
           <div className="flex items-center justify-end space-x-4">
             {/* Desktop Sign In Button */}
-            <Button className={`hidden lg:inline-flex ${user && "hidden"}`}>
+            <Button
+              className={`hidden ${!user && !isUserInfoRetrieving && "lg:inline-flex"}`}
+            >
               <Link href="/login">Sign In</Link>
             </Button>
 
