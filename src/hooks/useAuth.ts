@@ -41,6 +41,7 @@ export const useAuth = () => {
 
   return {
     user,
+    vehicleInfo: data?.data?.vehicleInfo,
     isAuthenticated,
     isUserInfoRetrieving: loading,
     userQuerySuccess,

@@ -36,7 +36,7 @@ interface User {
 const profileFormSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters."),
   // Driver-specific fields
-  vehicleModel: z.string().optional(),
+  model: z.string().optional(),
   licensePlate: z.string().optional(),
 });
 
@@ -56,16 +56,17 @@ const passwordFormSchema = z
 
 interface ProfileFormProps {
   user: User;
+  vehicleInfo?: { model: string; licensePlate: string };
 }
 
-export function ProfileForm({ user }: ProfileFormProps) {
+export function ProfileForm({ user, vehicleInfo }: ProfileFormProps) {
   // Form for profile details
   const profileForm = useForm<z.infer<typeof profileFormSchema>>({
     resolver: zodResolver(profileFormSchema),
     defaultValues: {
       name: user.name || "",
-      vehicleModel: user.vehicleModel || "",
-      licensePlate: user.licensePlate || "",
+      model: vehicleInfo?.model || "",
+      licensePlate: vehicleInfo?.licensePlate || "",
     },
   });
 
@@ -134,7 +135,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
                   </h3>
                   <FormField
                     control={profileForm.control}
-                    name="vehicleModel"
+                    name="model"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Vehicle Model</FormLabel>

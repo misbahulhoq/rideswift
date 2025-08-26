@@ -4,7 +4,8 @@ import React from "react";
 import { ProfileForm } from "./ProfileForm";
 
 const DashboardHome = () => {
-  const { user } = useAuth();
+  const { user, vehicleInfo } = useAuth();
+  console.log(vehicleInfo);
   if (!user) return null;
   return (
     <div className="container mx-auto py-10">
@@ -13,7 +14,7 @@ const DashboardHome = () => {
         Manage your account settings and personal information.
       </p>
 
-      <ProfileForm user={user} />
+      <ProfileForm user={user} vehicleInfo={vehicleInfo} />
     </div>
   );
 };
