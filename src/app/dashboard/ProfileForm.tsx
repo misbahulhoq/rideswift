@@ -22,6 +22,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { useUpdateUserInfoMutation } from "@/redux/features/auth/authApiSlice";
+import Swal from "sweetalert2";
 
 // Define a user type based on our auth context
 interface User {
@@ -36,8 +38,10 @@ interface User {
 const profileFormSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters."),
   // Driver-specific fields
-  model: z.string().optional(),
-  licensePlate: z.string().optional(),
+  vehicleInfo: z.object({
+    model: z.string().optional(),
+    licensePlate: z.string().optional(),
+  }),
 });
 
 // Schema for changing the password
@@ -65,8 +69,7 @@ export function ProfileForm({ user, vehicleInfo }: ProfileFormProps) {
     resolver: zodResolver(profileFormSchema),
     defaultValues: {
       name: user.name || "",
-      model: vehicleInfo?.model || "",
-      licensePlate: vehicleInfo?.licensePlate || "",
+      vehicleInfo,
     },
   });
 
@@ -79,10 +82,25 @@ export function ProfileForm({ user, vehicleInfo }: ProfileFormProps) {
       confirmPassword: "",
     },
   });
+  const [updateUserInfo, { isLoading }] = useUpdateUserInfoMutation();
 
-  function onProfileSubmit(values: z.infer<typeof profileFormSchema>) {
-    console.log("Profile Update:", values);
-    alert("Profile updated successfully! Check console for data.");
+  async function onProfileSubmit(values: z.infer<typeof profileFormSchema>) {
+    await updateUserInfo(values)
+      .unwrap()
+      .then((res) => {
+        if (res.success) {
+          Swal.fire({
+            icon: "success",
+            title: "Info updated successfully.",
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          icon: "error",
+        });
+      });
   }
 
   function onPasswordSubmit(values: z.infer<typeof passwordFormSchema>) {
@@ -135,7 +153,7 @@ export function ProfileForm({ user, vehicleInfo }: ProfileFormProps) {
                   </h3>
                   <FormField
                     control={profileForm.control}
-                    name="model"
+                    name="vehicleInfo.model"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Vehicle Model</FormLabel>
@@ -151,7 +169,7 @@ export function ProfileForm({ user, vehicleInfo }: ProfileFormProps) {
                   />
                   <FormField
                     control={profileForm.control}
-                    name="licensePlate"
+                    name="vehicleInfo.licensePlate"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>License Plate</FormLabel>

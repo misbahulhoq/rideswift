@@ -38,6 +38,20 @@ const authApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    updateUserInfo: builder.mutation<
+      IApiResponse,
+      {
+        name?: string;
+        password?: string;
+        vehicleInfo?: { model?: string; licensePlate?: string };
+      }
+    >({
+      query: (payload) => ({
+        url: "/auth/me",
+        method: "PATCH",
+        body: payload,
+      }),
+    }),
   }),
 });
 
@@ -46,4 +60,5 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useGetCurrentUserQuery,
+  useUpdateUserInfoMutation,
 } = authApi;
